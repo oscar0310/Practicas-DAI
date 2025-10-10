@@ -1,4 +1,5 @@
 # REPOSITORIO PARA LAS PRÁCTICAS DE DISEÑO DE APLICACIONES DE INTERNET.
+## [ENLACE AL REPOSITORIO](https://github.com/oscar0310/Practicas-DAI.git)
 ## PRACTICA 1.1 OBTENCIÓN DE DATOS CON EL PARSER DE HTML.
 En esta práctica hemos aprendido a obtener datos con el parser de html:
 - Primero con las herramientas del navegador hemos obtenido el código HTML de la página web del mercadona.
@@ -190,7 +191,7 @@ Para esta lección se propone hacer dos actividades:
     - Productos de menos de 1 € que no sean agua
     - Aceites ordenados por precio
     - Productos en garrafa
-    
+
 A groso modo consultas.js  se encarga de conectarse a la bd y hacer las consultas con el método find para buscar en la base de datos.
 
 ```javascript
