@@ -1,4 +1,6 @@
 {
+  "main": "parser_aceites.js",
+  "type": "module",
   "dependencies": {
     "mongoose": "^8.19.0",
     "node-html-parser": "^7.0.1"
