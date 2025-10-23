@@ -2,7 +2,16 @@
   "main": "parser_aceites.js",
   "type": "module",
   "dependencies": {
+    "chokidar": "^3.6.0",
+    "express": "^5.1.0",
     "mongoose": "^8.19.0",
-    "node-html-parser": "^7.0.1"
+    "node-html-parser": "^7.0.1",
+    "nunjucks": "^3.2.4"
+  },
+  "scripts": {
+    "dev": "node --watch --env-file=.env tienda.js",
+    "consultas": "node --env-file=.env P1/consultas.js",
+    "parser": "node --env-file=.env P1/parser_aceites.js",
+    "seed": "node --env-file=.env P1/seed.js"
   }
 }
