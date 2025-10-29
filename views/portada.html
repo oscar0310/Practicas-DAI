@@ -16,10 +16,21 @@
 
                 <h1 href="#" class="navbar-brand">Supermercado OFR</h1>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav">
-                        <a href="#" class="nav-item nav-link active">Categorías</a>
+                    <div class="navbar-nav col-md-auto">
+                        <a href="#"
+                            class="nav-item nav-link active">Categorías</a>
                         <a href="#" class="nav-item nav-link">Listas</a>
                     </div>
+                    <form class="navbar-nav ms-auto" action="/" method="GET">
+                        <div class="input-group">
+                            <input class="form-control" type="text"
+                                id="busqueda" name="busqueda"
+                                placeholder="Busca sus productos..." />
+                            <button type="submit" class="btn btn-secondary">
+                                Buscar</button>
+                        </div>
+                    </form>
+
                     <div class="navbar-nav ms-auto">
                         <a href="#" class="nav-item nav-link">Identifícate</a>
                         <a href="#" class="nav-item nav-link">Carrito</a>
@@ -31,11 +42,21 @@
             <section class="container-fluid border">
                 <div class="row">
                     {% for producto_random in productos_random %}
-                    <div class="col border text-center ">
-                        <img src="{{ producto_random.url_img }}" alt="{{ producto_random.texto_1 }}">
-                        <h3>{{ producto_random.texto_1 }}</h3>
-                        <p>{{ producto_random.texto_2 }}</p>
-                        <p>{{ producto_random.precio_euros }}€</p>
+                    <div class="col text-center ">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <img src="{{ producto_random.url_img }}" alt="{{ producto_random.texto_1 }}">
+                                <h3 class="card-title">{{
+                                    producto_random.texto_1 }}</h3>
+                                <p class="card-text">{{ producto_random.texto_2}}</p>
+                                {% if producto_random.precio_rebajado == 0 %}
+                                    <p class="card-text">{{producto_random.precio_euros }}€</p>
+                                {% else %}
+                                    <p class="card-text text-danger"><del>{{producto_random.precio_euros }}€</del></p>
+                                    <p class="card-text text-success">{{producto_random.precio_rebajado}}€</p>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>
