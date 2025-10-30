@@ -27,12 +27,11 @@ app.use(session({
 }))
 
 
-app.use((req, res, next) => {
-	if (!req.session.carrito) {
+app.use((req, res, next) => { //middleware
+	if (!req.session.carrito) {  //Comprueba que no este incializado antes si no siempre será un array vacio
 		req.session.carrito=[]
 	}
-
-	next()
+	next() //Para pasar a la siguiente ruta
 });
 
 

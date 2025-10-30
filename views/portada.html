@@ -37,7 +37,9 @@
                         <a href="#" class="nav-item nav-link active">
                             Carrito 
                             <span class="badge text-bg-primary rounded-circle bg-danger">{{ totalProductos }}</span> 
-                            <span class="bottom-0 text-bg-secondary ">{{ precioTotal }}€</span>
+                            {% if precioTotal %}
+                                <span class="bottom-0 text-bg-secondary " >{{ precioTotal }}€ </span>
+                            {% endif %}  
                         </a>
                     </div>
                 </div>
