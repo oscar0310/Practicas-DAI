@@ -1,4 +1,4 @@
-# PRÁCTICA 2.2 TIENDA ON-LINE: CARRITO
+# PRÁCTICA 2.3 TIENDA ON-LINE: CARRITO
 
 Para esta sesión vamos ha hacer funcionar el botón **Añadir al carro**, los productos que se añadan serán guardados usando sesiones las cuales son guardado hasta que se cierra la sesión.
 
