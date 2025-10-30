@@ -4,6 +4,7 @@
   "dependencies": {
     "chokidar": "^3.6.0",
     "express": "^5.1.0",
+    "express-session": "^1.18.2",
     "mongoose": "^8.19.0",
     "node-html-parser": "^7.0.1",
     "nunjucks": "^3.2.4"
