@@ -36,7 +36,15 @@ const productoSchema = new mongoose.Schema({
 		type: Number,
 		required: true,
 		trim: true,
+	},
+	precio_rebajado: {
+		type: Number,
+		required: false,
+		default: 0,
+		trim: true
 	}
+
+
 })
 const Producto = mongoose.model('Producto', productoSchema);
 export default Producto

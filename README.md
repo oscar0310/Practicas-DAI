@@ -9,4 +9,6 @@ Repositorio de Óscar Fernández Rodríguez para las prácticas de la asignatura
 - [Práctica 1.2 Población inicial y consulta a la base de datos](docs/practica1.2.md)
 ### PRÁCTICA 2
 - [Práctica 2.1 Tienda on-line con express, nunjucks y mongoose](docs/practica2.1.md)
+- [Práctica 2.2 Tienda on-line búsquedas y más](docs/practica2.2.md)
+- [Práctica 2.3 Tienda on-line carrito](docs/practica2.3.md)
 
