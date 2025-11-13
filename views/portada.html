@@ -2,7 +2,8 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Supermercado</title>
+        <title>Supermercado OFR</title>
+        <link rel="icon" type="image/png" href="/static/favicon.png" />
         <!-- Bootstrap CSS -->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -33,7 +34,12 @@
                     </form>
 
                     <div class="navbar-nav ms-auto">
-                        <a href="#" class="nav-item nav-link active">Identifícate</a>
+                        {% if usuario %}
+                            <a href="#" class="nav-item nav-link active">{{ usuario }}</a>
+                            <a href="/usuarios/logout" class="nav-item nav-link active">Salir</a>
+                        {% else %}
+                            <a href="/usuarios/login" class="nav-item nav-link active">Identifícate</a>
+                        {% endif %}
                         <a href="#" class="nav-item nav-link active">
                             Carrito 
                             <span class="badge text-bg-primary rounded-circle bg-danger">{{ totalProductos }}</span> 
@@ -68,6 +74,13 @@
                                         Añadir al carrito
                                         </button>
                                     </form>
+                                    {% if admin %}
+                                        <form class="mb-3" action=" " method="GET">
+                                            <button type="submit" class="btn btn-warning btn-sm  ">
+                                                Editar Precio
+                                            </button>
+                                        </form>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
