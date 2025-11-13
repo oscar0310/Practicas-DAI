@@ -36,8 +36,10 @@ const autentificación = (req, res, next) => {
 		const data = jwt.verify(token, process.env.SECRET_KEY);
 		req.username = data.usuario                               // username en el request
 		app.locals.usuario = data.usuario                         // y accesible en las plantillas {{ usuario }}
+		app.locals.admin = data.admin							  // y si es admin o no
 	} else {
 		app.locals.usuario = undefined
+		app.locals.admin = undefined
 	}
 	next()
 }

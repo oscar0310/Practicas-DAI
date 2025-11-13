@@ -28,7 +28,7 @@ router.post('/login', async (req, res)=> {
 		}
 		
 		// Si el usuario es válido, su nombre de usuario estará en usuario.username
-		const token = jwt.sign({usuario: usuario.username}, process.env.SECRET_KEY)
+		const token = jwt.sign({usuario: usuario.username, admin:usuario.admin}, process.env.SECRET_KEY)
  
 		res.cookie("access_token", token, {            // cookie en el response
 			httpOnly: true,

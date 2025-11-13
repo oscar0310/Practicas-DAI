@@ -19,12 +19,15 @@ const usuarioSchema = new mongoose.Schema({
         required: true, //requerida
         minlength: 6 //una longitud de  6
     },
+    admin: {
+        type: Boolean,
+        default: false,
+        required: false
+    },
     createdAt: {
         type: Date, //Fecha
         default: Date.now //Valor de la fecha actual
     }
-
-   
 });
 
 //Método de encriptación de la contraseña

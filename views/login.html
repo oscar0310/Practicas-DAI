@@ -1,65 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8">
-        <title>Login</title>
-        <link rel="icon" type="image/png" href="/static/avatar.png"/>
-        <!-- Bootstrap CSS -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-            crossorigin="anonymous">
-        <style>
-            body {
-               
-                min-height: 100vh;  /*Para centrarlo*/
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background-color: #198754; 
-            }
 
-            section{
-                max-width: 800px; 
-                margin: auto;
-            }
-        </style>
-    </head>
-    <body>
-        <main class="container">
-            <section class="card-group">
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <link rel="icon" type="image/png" href="/static/avatar.png" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <style>
+        body {
+            min-height: 100vh;
+            /*Para centrarlo*/
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #198754;
+        }
+
+        section {
+            max-width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <section class="card-group">
             <div class="card">
                 <div class="card-body justify-content-center align-items-center">
-                        <img src="/static/logo.png" class="img-fluid" alt="Logo Supermercado" />
+                    <img src="/static/logo.png" class="img-fluid" alt="Logo Supermercado" />
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title text-center mb-4">Iniciar Sesión</h2>
-                    <form action="/usuarios/login" method="POST">
+                    <h2 class="card-title text-center mb-4">Iniciar
+                        Sesión</h2>
+                    <form action="/usuarios/login" method="POST" class="needs-validation" novalidate>
                         <div class="mb-3">
-                            <label class="form-label">Nombre de Usuario:</label>
-                            <input type="text" id="username" name="username" class="form-control" placeholder="Introduce su nombre de usuario" required/>
+                            <label class="form-label">Nombre de
+                                Usuario:</label>
+                            <input type="text" id="username" name="username" class="form-control"
+                                placeholder="Introduce su nombre de usuario" required />
+                            <div class="invalid-feedback">
+                                Por favor escriba su Nombre de Usuario.
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Contraseña:</label>
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Introduce su contraseña" required/>
+                            <input type="password" id="password" name="password" class="form-control"
+                                placeholder="Introduce su contraseña" required />
+                            <div class="invalid-feedback">
+                                Por favor escriba su contraseña.
+                            </div>
                         </div>
                         <div class="mb-3 text-center">
-                            <p class="card-text"> No estás registrado: <a href="/usuarios/registro">Registro.</a></p>
+                            <p class="card-text">
+                                No estás registrado:
+                                <a href="/usuarios/registro">Registro.</a>
+                            </p>
                         </div>
                         {% if error %}
-                            <div class="alert-warning text-danger text-center mb-2">
-                                <p>{{ error }}</p>
-                            </div>
+                        <div class="alert-warning text-danger text-center mb-2">
+                            <p>{{ error }}</p>
+                        </div>
                         {% endif %}
                         <div class="d-grid">
-                            <input type="submit" value="Iniciar Sesión" class="btn btn-success"/>
+                            <input type="submit" value="Iniciar Sesión" class="btn btn-success" />
                         </div>
                     </form>
                 </div>
             </div>
         </section>
-        </main>
-    </body>
+    </main>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+</body>
+
+</html>
