@@ -33,7 +33,12 @@
                     </form>
 
                     <div class="navbar-nav ms-auto">
-                        <a href="#" class="nav-item nav-link active">Identifícate</a>
+                        {% if usuario %}
+                            <a href="#" class="nav-item nav-link active">{{ usuario }}</a>
+                            <a href="/usuarios/logout" class="nav-item nav-link active">Salir</a>
+                        {% else %}
+                            <a href="/usuarios/login" class="nav-item nav-link active">Identifícate</a>
+                        {% endif %}
                         <a href="#" class="nav-item nav-link active">
                             Carrito 
                             <span class="badge text-bg-primary rounded-circle bg-danger">{{ totalProductos }}</span> 

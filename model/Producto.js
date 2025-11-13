@@ -1,6 +1,7 @@
  // ./model/Producto.js 
 import mongoose from 'mongoose';
 
+
 const productoSchema = new mongoose.Schema({
 	categoría: {
 		type: String,
