@@ -11,4 +11,6 @@ Repositorio de Óscar Fernández Rodríguez para las prácticas de la asignatura
 - [Práctica 2.1 Tienda on-line con express, nunjucks y mongoose](docs/practica2.1.md)
 - [Práctica 2.2 Tienda on-line búsquedas y más](docs/practica2.2.md)
 - [Práctica 2.3 Tienda on-line carrito](docs/practica2.3.md)
+- [Práctica 3.1 Auntententicación con JWT](docs/practica3.1.md)
+- [Práctica 3.2 Autorización](docs/practica3.2.md)
 
