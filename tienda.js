@@ -27,19 +27,19 @@ app.use(express.json()); // Middleware para soportar cuerpos JSON
 app.use(express.urlencoded({ extended: true })); // Middleware para soportar cuerpos de formularios
 
 //Usamos la cookie antes del middleware de auntenticacion
-app.use(cookieParser())
+app.use(cookieParser()) //analizamos las cabeceras de las cookies
 
 // middleware de
 const autentificación = (req, res, next) => {
-	const token = req.cookies.access_token;
-	if (token) {
-		const data = jwt.verify(token, process.env.SECRET_KEY);
+	const token = req.cookies.access_token; //Buscamos en las cookies si existe una llamada 'access_token'
+	if (token) { //si existe 
+		const data = jwt.verify(token, process.env.SECRET_KEY);  //comrobamos que sea válido
 		req.username = data.usuario                               // username en el request
 		app.locals.usuario = data.usuario                         // y accesible en las plantillas {{ usuario }}
-		app.locals.admin = data.admin							  // y si es admin o no
+		app.locals.admin=data.admin								  //admin en el request
 	} else {
-		app.locals.usuario = undefined
-		app.locals.admin = undefined
+		app.locals.usuario = undefined //si no hay llamada de acceso no hay ningún usuario.
+		app.locals.admin = undefined //no hay administrador
 	}
 	next()
 }

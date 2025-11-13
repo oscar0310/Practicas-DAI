@@ -1,6 +1,7 @@
 // ./routes/router_tienda.js
 import express from "express";
 import Producto from "../model/Producto.js";
+
 const router = express.Router();
       
 // Portada en /

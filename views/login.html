@@ -37,13 +37,13 @@
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">Iniciar
                         Sesión</h2>
-                    <form action="/usuarios/login" method="POST" class="needs-validation" novalidate>
+                    <form action="/usuarios/login" method="POST" class="needs-validation" novalidate> <!--formulario POST con action ruta login, usa bootstrap para las validaciones por eso lo de novalidate-->
                         <div class="mb-3">
                             <label class="form-label">Nombre de
                                 Usuario:</label>
                             <input type="text" id="username" name="username" class="form-control"
                                 placeholder="Introduce su nombre de usuario" required />
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback"> <!--Validación Bootstrap-->
                                 Por favor escriba su Nombre de Usuario.
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                             <label class="form-label">Contraseña:</label>
                             <input type="password" id="password" name="password" class="form-control"
                                 placeholder="Introduce su contraseña" required />
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback">  <!--Validación Bootstrap-->
                                 Por favor escriba su contraseña.
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                 <a href="/usuarios/registro">Registro.</a>
                             </p>
                         </div>
-                        {% if error %}
+                        {% if error %} <!--si  hay algún error lo muestra-->
                         <div class="alert-warning text-danger text-center mb-2">
                             <p>{{ error }}</p>
                         </div>
@@ -75,6 +75,7 @@
         </section>
     </main>
     <script>
+        //Script de la documentación de bootstrap para validar
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (() => {
             'use strict'
