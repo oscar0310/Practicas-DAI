@@ -13,4 +13,5 @@ Repositorio de Óscar Fernández Rodríguez para las prácticas de la asignatura
 - [Práctica 2.3 Tienda on-line carrito](docs/practica2.3.md)
 - [Práctica 3.1 Auntententicación con JWT](docs/practica3.1.md)
 - [Práctica 3.2 Autorización](docs/practica3.2.md)
+- [Práctica 4 Api Restful, logging ](docs/practica4.md)
 
