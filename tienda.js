@@ -4,9 +4,13 @@ import nunjucks  from "nunjucks"
 import session from "express-session"
 import TiendaRouter from "./routes/router_tienda.js"     
 import UsuariosRouter from "./routes/router_usuarios.js" 
+import ProductosRouter from "./routes/router_apiproductos.js"
 import cookieParser from "cookie-parser"
 import jwt from "jsonwebtoken"
+import swaggerUi from "swagger-ui-express"
+import swaggerJSDoc from "swagger-jsdoc"	
 import connectDB from "./model/connectDB.js"
+
 await connectDB()
 
 const app = express()
@@ -44,13 +48,13 @@ const autentificación = (req, res, next) => {
 	next()
 }
 
-app.use(autentificación) //Aplicamos el middleware de autenticación
+app.use(autentificación); //Aplicamos el middleware de autenticación
 
 app.use(session({
 	secret: 'my-secret',      // a secret string used to sign the session ID cookie
 	resave: false,            // don't save session if unmodified
 	saveUninitialized: false  // don't create session until something stored
-}))
+}));
 
 
 app.use((req, res, next) => { //middleware
@@ -60,8 +64,29 @@ app.use((req, res, next) => { //middleware
 	next() //Para pasar a la siguiente ruta
 });
 
+//Configuración de Swagger 
+const swaggerOptions = {
+	definition: {
+		myapi: '3.0.0',
+		info: {
+			title: 'API de SUPERMERCADOS OFR',
+			version: '1.0.0',
+			description: 'Una API encargada de gestionar los procutos',
+		},
+		servers: [
+			{
+				url: `http://localhost:${process.env.PORT || 8000}`,
+			},
+		],
+	},
+	apis: ['./routes/router_apiproductos.js'], // Apunta al fichero que contiene los endpoints de la API
+};
+const specs = swaggerJSDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
 app.use("/", TiendaRouter);
 app.use("/usuarios", UsuariosRouter); // para los urls que comiencen por /usuarios
+app.use("/api/productos", ProductosRouter);
 
 // test para el servidor
 app.get("/hola", (req, res) => {

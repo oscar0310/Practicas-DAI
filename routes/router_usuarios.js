@@ -2,67 +2,86 @@
 import express from "express";
 import Usuario from "../model/Usuario.js";
 import jwt from "jsonwebtoken";
+import logger from "../logger.js"; 
 
 const router = express.Router(); //creamos el router
 
 // Para mostrar formulario de login              --> GET
-router.get('/login', (req, res)=>{
-	
+router.get('/login', (req, res) => {
 	res.render("login.html", { error: req.query.error }) // Pasamos el mensaje de error a la plantilla.
-})
-				
-// Para recoger datos del formulario de login    --> POST
-router.post('/login', async (req, res)=> {
-	
-		const user_name=req.body.username
-		const user__password=req.body.password
-		
-		
-		const usuario=await Usuario.findOne({username : user_name}) // Usamos findOne para obtener un único documento, no un array.
+});
 
-		
+// Para recoger datos del formulario de login    --> POST
+router.post('/login', async (req, res) => {
+	try {
+		const user_name = req.body.username
+		const user__password = req.body.password
+
+
+		const usuario = await Usuario.findOne({ username: user_name }) // Usamos findOne para obtener un único documento, no un array.
+
+
 		const password_valida = usuario ? await usuario.isValidPassword(user__password) : false // comprobamos si el usuario es nulo o no, y si no lo es validamos su contraseña
 
-		if(!usuario || !password_valida){ // si el usuario no existe o la contraseña no es válida
-			 return res.redirect('/usuarios/login?error=Usuario o contraseña incorrectos') //redirigiumos a la misma página pero con un error
+		if (!usuario || !password_valida) { // si el usuario no existe o la contraseña no es válida
+			logger.warn(`Se esta intentando dar de alta un usuario no valido con nombre: ${user_name}`)
+			return res.redirect('/usuarios/login?error=Usuario o contraseña incorrectos') //redirigimos a la misma página pero con un error
 		}
 		
+		logger.info(`Se ha dado de alta: ${user_name}`)
 		// Si el usuario es válido, su nombre de usuario estará en usuario.username y el admin
-		const token = jwt.sign({usuario: usuario.username, admin:usuario.admin}, process.env.SECRET_KEY)
- 
+		const token = jwt.sign({ usuario: usuario.username, admin: usuario.admin }, process.env.SECRET_KEY)
+
 		res.cookie("access_token", token, {            // cookie en el response
 			httpOnly: true,
 			secure: process.env.IN === 'production'      // en producción, solo con https
 		}).redirect("/")
-})
-				
+
+		
+	}
+	catch (err) {
+		logger.error(`Error al darse de alta un usuario: ${err}`)
+		res.status(500).send({ message: err.message })
+	}
+
+});
+
 // Registro
 router.get('/registro', (req, res) => {        // --> GET
 	res.render("registro.html", { error: req.query.error }); // Pasamos el mensaje de error (si existe) a la plantilla
-})
-	
+});
+
 router.post('/registro', async (req, res) => {  // --> POST
-	const user_name=req.body.username
-	const user_email=req.body.email
-    const user__password=req.body.password
+	try {
+		const user_name = req.body.username
+		const user_email = req.body.email
+		const user__password = req.body.password
 
-	const usuario_existente= await Usuario.findOne({$or: [{username : user_name}, {email : user_email}]}) //comprobamos si existe el usuario ya
-	if(usuario_existente){ // si existe
-		return res.redirect('/usuarios/registro?error=El usuario o el email ya está registrado') // se redirige a la misma página con el error
+		const usuario_existente = await Usuario.findOne({ $or: [{ username: user_name }, { email: user_email }] }) //comprobamos si existe el usuario ya
+		if (usuario_existente) { // si existe
+			return res.redirect('/usuarios/registro?error=El usuario o el email ya está registrado') // se redirige a la misma página con el error
+		}
+
+		const usuario = new Usuario({ username: user_name, email: user_email, password: user__password }) //añadimos el usuario
+
+		usuario.save() // encriptamos la contraseña
+
+		res.redirect('/')
+		logger.info(`Se ha registrado como nuevos usuario: ${user_name}`)
 	}
-
-	const usuario=new Usuario({username: user_name, email: user_email,password: user__password}) //añadimos el usuario
-
-	usuario.save() // encriptamos la contraseña
-
-	res.redirect('/')
-})
+	catch (err) {
+		logger.error(`Se ha producido un error en el registro: ${err}`)
+		res.status(500).send({ message: err.message })
+	}
+	
+});
 
 
 // Salida
 router.get('/logout', (req, res) => {
+	logger.info(`Cierra sesión el usuario: ${req.username}`)
 	// Limpiamos la cookie que contiene el token y luego redirigimos a la portada.
 	res.clearCookie('access_token').redirect('/');
-})
+});
 
 export default router;
