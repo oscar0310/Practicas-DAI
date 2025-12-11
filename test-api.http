@@ -1,0 +1,37 @@
+//test-api.http
+GET http://localhost:8000/api/productos
+
+###
+
+GET http://localhost:8000/api/productos/6902941ed0528dac76b81874
+
+###
+
+POST http://localhost:8000/api/productos
+content-type: application/json
+ 
+{
+     "categoría": "Aguas y refrescos",
+     "subcategoría": "Agua", 
+     "url_img": "https://prod-mercadona.imgix.net/images/eac424e5ce95dc651fe19e46b0a22d16.jpg?fit=crop&h=300&w=300", 
+     "texto_1":"Agua mineral grande Font Natura", 
+     "texto_2":"Garrafa 8 L", 
+     "texto_precio" : "0.92€/ud ", 
+     "precio_euros" : 0.92 , 
+     "precio_rebajado" : 0
+}
+
+###
+
+DELETE  http://localhost:8000/api/productos/6917103c00925d6b9467ada9
+
+###
+
+PUT  http://localhost:8000/api/productos/6902941ed0528dac76b818aa
+content-type: application/json
+
+{
+     "precio_euros" : 1 ,
+     "texto_precio" : "1€/ud "     
+}
+
