@@ -232,7 +232,8 @@ router.delete('/:id', async (req, res) => { //eliminamos un producto por su id
  */
 router.put('/:id', async (req, res) => { //Cambiamos el precio de un producto del cual se pasa su id
     try {
-        const producto = await Producto.findByIdAndUpdate(req.params.id, { precio_euros: req.body.precio_euros, texto_precio: req.body.texto_precio }, { new: true }) //Actualizamos su precio
+        const texto_precio =  `${req.body.precio_euros} €`; //Creamos el texto del precio
+        const producto = await Producto.findByIdAndUpdate(req.params.id, { precio_euros: req.body.precio_euros, texto_precio: texto_precio}, { new: true }) //Actualizamos su precio
         res.send(producto)
         logger.info(`Se ha cambiado correctamente el precio del producto: ${producto.texto_1} con id: ${producto._id} a ${producto.texto_precio}`)
     }

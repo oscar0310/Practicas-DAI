@@ -10,6 +10,7 @@
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous">
+            <script src="/static/cambio-precio.js" defer></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-success navbar-dark">
@@ -68,19 +69,20 @@
                                         <p class="card-text text-danger"><del>{{producto.precio_euros }}€</del></p>
                                         <p class="card-text text-success">{{producto.precio_rebajado}}€</p>
                                     {% endif %}
+                                    {% if admin %}
+                                    <div class="mb-3">
+                                            <input type="number" class="input-precio" name="precio_euros" placeholder="Nuevo Precio">
+                                            <button type="button" class="boton_cambiar_precio btn btn-warning btn-sm" data-producto-id="{{ producto._id }}">
+                                                Editar Precio
+                                            </button>
+                                        </div>
+                                    {% endif %}
                                     <form class="" action="/al_carrito/" method="GET">
                                         <input type="hidden" name="productoId" value="{{ producto._id}}">
                                         <button type="submit" class="btn btn-success btn-sm ">
                                         Añadir al carrito
                                         </button>
                                     </form>
-                                    {% if admin %}
-                                        <form class="mb-3" action=" " method="GET">
-                                            <button type="submit" class="btn btn-warning btn-sm  ">
-                                                Editar Precio
-                                            </button>
-                                        </form>
-                                    {% endif %}
                                 </div>
                             </div>
                         </div>
