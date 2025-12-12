@@ -69,6 +69,12 @@
                                         <p class="card-text text-danger"><del>{{producto.precio_euros }}€</del></p>
                                         <p class="card-text text-success">{{producto.precio_rebajado}}€</p>
                                     {% endif %}
+                                    <form class="" action="/al_carrito/" method="GET">
+                                        <input type="hidden" name="productoId" value="{{ producto._id}}">
+                                        <button type="submit" class="btn btn-success btn-sm ">
+                                        Añadir al carrito
+                                        </button>
+                                    </form>
                                     {% if admin %}
                                     <div class="mb-3">
                                             <input type="number" class="input-precio" name="precio_euros" placeholder="Nuevo Precio">
@@ -77,12 +83,6 @@
                                             </button>
                                         </div>
                                     {% endif %}
-                                    <form class="" action="/al_carrito/" method="GET">
-                                        <input type="hidden" name="productoId" value="{{ producto._id}}">
-                                        <button type="submit" class="btn btn-success btn-sm ">
-                                        Añadir al carrito
-                                        </button>
-                                    </form>
                                 </div>
                             </div>
                         </div>
