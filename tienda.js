@@ -5,11 +5,14 @@ import session from "express-session"
 import TiendaRouter from "./routes/router_tienda.js"     
 import UsuariosRouter from "./routes/router_usuarios.js" 
 import ProductosRouter from "./routes/router_apiproductos.js"
+import ApiBusquedaRouter from "./routes/router_apibusqueda-anticipada.js"
+import BusquedaRouter from "./routes/router_busqueda-anticipada.js"
 import cookieParser from "cookie-parser"
 import jwt from "jsonwebtoken"
 import swaggerUi from "swagger-ui-express"
 import swaggerJSDoc from "swagger-jsdoc"	
 import connectDB from "./model/connectDB.js"
+
 
 await connectDB()
 
@@ -87,6 +90,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use("/", TiendaRouter);
 app.use("/usuarios", UsuariosRouter); // para los urls que comiencen por /usuarios
 app.use("/api/productos", ProductosRouter);
+app.use("/api/busqueda-anticipada", ApiBusquedaRouter);
+app.use("/busqueda-anticipada", BusquedaRouter);
 
 // test para el servidor
 app.get("/hola", (req, res) => {
