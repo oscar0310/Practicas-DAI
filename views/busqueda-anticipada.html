@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
     <title>Búsqueda anticipada</title>
-    
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@unocss/reset/tailwind.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@unocss/runtime"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/static/busqueda-anticipada.js" defer></script>
 </head>
 <body class="font-sans text-gray-600">
 
@@ -49,52 +49,29 @@
         </div>
     </header>
 
-    <main class="flex justify-center mt-32">
-        <h2 id="resultado-texto" class="text-3xl font-normal text-gray-800">
-            </h2>
+    <main class="flex flex-col items-center mt-32">
+        <h2 id="resultado-texto" class="text-3xl font-normal text-gray-800"> </h2>
+        <div id="tarjetas" class="flex flex-wrap justify-center gap-4"></div>
     </main>
 
-    <script>
-        // 1. Seleccionamos los elementos del DOM
-        const inputBusqueda = document.getElementById('input-busqueda');
-        const resultadoTexto = document.getElementById('resultado-texto');
-
-        // 2. Agregamos el "escuchador" de eventos
-        // 'input' se dispara cada vez que el usuario escribe o borra un carácter
-        inputBusqueda.addEventListener('input', (event) => {
-            
-            // Obtenemos el texto y quitamos espacios al inicio/final
-            const termino = event.target.value.trim();
-
-            // Lógica de 3 caracteres
-            if (termino.length < 3) {
-                resultadoTexto.textContent = ''; // Limpiamos si es muy corto
-                return;
-            }
-
-            // 3. Llamada al API (Fetch)
-            // Asegúrate de que la ruta coincida con tu router de express (/api/busqueda-anticipada/)
-            fetch(`/api/busqueda-anticipada/${termino}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error en la respuesta del servidor');
-                    }
-                    return response.json();
-                })
-                .then(productos => {
-                    // 4. Actualizamos el HTML con la respuesta
-                    if (productos.length > 0) {
-                        resultadoTexto.textContent = `Encontrados ${productos.length} productos`;
-                    } else {
-                        resultadoTexto.textContent = `No se encontraron productos que contengan "${termino}"`;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    resultadoTexto.textContent = 'Hubo un error al realizar la búsqueda';
-                });
-        });
-    </script>
+    <template id="plantilla">
+        <div class="max-w-sm rounded overflow-hidden w-full sm:w-64 hover:shadow border border-rounded">
+            <img class="img_producto w-10/12 h-3/6 bg-gray-400 ml-5"
+                 src="" 
+                 alt="">
+            <div class="px-6 py-4">
+                <div class="nombre_producto mb-2 text-sm"></div>
+                <div class="descripcion_producto text-gray-600 text-xs mb-2 h-12 overflow-hidden"></div>
+                <p class="precio_producto text-gray-700 text-base"></p>
+            </div>
+            <div class="px-6 pb-2 text-center">
+                <span class="w-full inline-block rounded-full px-3 py-1 text-sm text-yellow-800 mr-2 mb-2 
+                             border border-yellow-600 hover:bg-yellow-200">
+                    Añadir al carro
+                </span>
+            </div>
+        </div>
+    </template>
 
 </body>
 </html>
