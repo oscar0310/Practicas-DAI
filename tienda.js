@@ -12,11 +12,14 @@ import jwt from "jsonwebtoken"
 import swaggerUi from "swagger-ui-express"
 import swaggerJSDoc from "swagger-jsdoc"	
 import connectDB from "./model/connectDB.js"
+import cors from "cors"
 
 
 await connectDB()
 
 const app = express()
+
+app.use(cors()) //deshabilitando todas las request de Cors
 
 const IN = process.env.IN || 'development'
 
