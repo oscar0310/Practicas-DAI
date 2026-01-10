@@ -10,6 +10,7 @@
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous">
+            <script src="/static/cambio-precio.js" defer></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg bg-success navbar-dark">
@@ -63,24 +64,25 @@
                                 <p class="card-text">{{ producto.texto_2}}</p>
                                 <div class="mt-auto">
                                     {% if producto.precio_rebajado == 0 %}
-                                        <p class="card-text">{{producto.precio_euros }}€</p>
+                                        <p class="card-text precio_actualizar">{{producto.precio_euros }}€</p>
                                     {% else %}
                                         <p class="card-text text-danger"><del>{{producto.precio_euros }}€</del></p>
                                         <p class="card-text text-success">{{producto.precio_rebajado}}€</p>
                                     {% endif %}
+                                    {% if admin %}
+                                    <div class="mb-3 cambiar_precio d-flex flex-column align-items-center gap-2">
+                                            <input type="number" class="input-precio " placeholder="Nuevo Precio">
+                                            <button type="button" class="boton_cambiar_precio btn btn-warning btn-sm ">
+                                                Editar Precio
+                                            </button>
+                                    </div>
+                                    {% endif %}
                                     <form class="" action="/al_carrito/" method="GET">
-                                        <input type="hidden" name="productoId" value="{{ producto._id}}">
+                                        <input type="hidden" class="productoID" name="productoId" value="{{ producto._id}}">
                                         <button type="submit" class="btn btn-success btn-sm ">
                                         Añadir al carrito
                                         </button>
                                     </form>
-                                    {% if admin %}
-                                        <form class="mb-3" action=" " method="GET">
-                                            <button type="submit" class="btn btn-warning btn-sm  ">
-                                                Editar Precio
-                                            </button>
-                                        </form>
-                                    {% endif %}
                                 </div>
                             </div>
                         </div>

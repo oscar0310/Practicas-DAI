@@ -16,4 +16,10 @@ Repositorio de Óscar Fernández Rodríguez para las prácticas de la asignatura
 - [Práctica 3.2 Autorización](docs/practica3.2.md)
 ### PRÁCTICA 4
 - [Práctica 4 Api Restful, logging ](docs/practica4.md)
+### PRÁCTICA 5
+- [Práctica 5.1 DOM, botón para cambiar precios.](docs/practica5.1.md)
+- [Práctica 5.2 DOM, búsqueda anticipada con TailwindCSS.](docs/practica5.2.md)
+- [Práctica 5.3 DOM, tarjetas.](docs/practica5.3.md)
+### PRÁCTICA 6
+- [Práctica 6, Front end con React](docs/practica6.md)
 
