@@ -22,4 +22,7 @@ Repositorio de Óscar Fernández Rodríguez para las prácticas de la asignatura
 - [Práctica 5.3 DOM, tarjetas.](docs/practica5.3.md)
 ### PRÁCTICA 6
 - [Práctica 6, Front end con React](docs/practica6.md)
+### PRÁCTICA 7
+- [Práctica 7, Despliegue con Docker Compose](docs/practica7.md)
+
 

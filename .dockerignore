@@ -1,0 +1,15 @@
+node_modules 
+Dockerfile
+.dockerignore
+.git
+.gitignore
+README.md 
+docs
+frontend
+.env
+docker-compose*.yml
+test-api.http
+app-error.log 
+combined.log
+P1
+data/

@@ -2,8 +2,9 @@
 import mongoose from "mongoose";
 const USER_DB = process.env.USER_DB
 const PASS = process.env.PASS
+const DB_HOST = process.env.DB_HOST
 
-const url = `mongodb://${USER_DB}:${PASS}@localhost:27017/DAI?authSource=admin`
+const url = `mongodb://${USER_DB}:${PASS}@${DB_HOST}:27017/DAI?authSource=admin`
 	
 export default async function connectDB() {            // export default
 	try {

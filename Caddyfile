@@ -1,0 +1,16 @@
+:80 {
+	redir /react /public/react/index.html
+			
+	handle_path /public/* {
+		root * /usr/share/caddy/public
+		file_server
+	}
+			
+	handle_path /* {
+		reverse_proxy tienda-dai:8000
+	}
+			
+	log {
+		output stdout
+	}
+}

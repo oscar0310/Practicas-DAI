@@ -1,0 +1,39 @@
+services:
+  #contenedor de la tienda
+  tienda-dai:
+    build: . #lo construimos a partir del Dockerfile que hemos hecho de la aplicación
+    depends_on: #depende de la base de datos
+      - mongo
+    restart: unless-stopped
+    environment: #declaramos las variables de entorno
+      - IN=production
+      - USER_DB=${USER_DB}
+      - PASS=${PASS}
+      - SECRET_KEY=${SECRET_KEY}
+      - DB_HOST=mongo
+  #contenedor de la base de datos
+  mongo:
+    image: mongo:noble #imagen de mongo
+    restart: unless-stopped 
+    volumes:
+      - ./data:/data/db #obtenemos los datos de la carpeta data
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${USER_DB} #variables para identificarse en la bd
+      MONGO_INITDB_ROOT_PASSWORD: ${PASS}
+  #contenedor del proxy inverso
+  caddy:
+    image: caddy:alpine #usamos la imagen de caddy
+    depends_on:
+      - tienda-dai #depende dela aplicación de la tienda
+    restart: unless-stopped
+    ports:
+      - 8001:80
+    volumes:
+      - caddy-config:/config
+      - caddy-data:/data
+      - ./Caddyfile:/etc/caddy/Caddyfile #archivo de configuracion
+      - ./public:/usr/share/caddy/public #le pasamos los archivos estaticos
+      - ./frontend/dist:/usr/share/caddy/public/react #el front end en la carpeta dist
+volumes:
+  caddy-config:
+  caddy-data:
