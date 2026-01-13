@@ -39,7 +39,7 @@ export default function Resultados({ de }) {
     }
     // hook de swr, re-rendiriza en algún cambio de las variables
     const { data, error, isLoading } = useSWR(
-        `http://localhost:8000/api/busqueda-anticipada/${de}`,
+        `/api/busqueda-anticipada/${de}`,
         fetcher
     );
 

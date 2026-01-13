@@ -27,13 +27,13 @@ services:
       - tienda-dai #depende dela aplicación de la tienda
     restart: unless-stopped
     ports:
-      - 8000:80 
+      - 8001:80
     volumes:
       - caddy-config:/config
       - caddy-data:/data
       - ./Caddyfile:/etc/caddy/Caddyfile #archivo de configuracion
       - ./public:/usr/share/caddy/public #le pasamos los archivos estaticos
-      - ./frontend/dist:/usr/share/caddy/public/react #rl front end en la carpeta dist
+      - ./frontend/dist:/usr/share/caddy/public/react #el front end en la carpeta dist
 volumes:
   caddy-config:
   caddy-data:

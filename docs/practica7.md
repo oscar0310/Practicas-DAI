@@ -122,7 +122,7 @@ services:
       - tienda-dai #depende dela aplicación de la tienda
     restart: unless-stopped
     ports:
-      - 8000:80 
+      - 8001:80 
     volumes:
       - caddy-config:/config
       - caddy-data:/data
